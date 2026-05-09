@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cháles Verde Encanto — Espaço para Eventos Exclusivos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#080E07',
+            forest:   { 950:'#060D05', 900:'#0A1409', 800:'#0F1E0D', 700:'#162B13', 600:'#1E3D1A', 500:'#2D5A27' },
+            gold:     { 300:'#F0D98C', 400:'#E8C84A', 500:'#D4AF37', 600:'#B8941E', 700:'#9A7A10' },
+            copper:   { 400:'#D4855A', 500:'#B87333', 600:'#9A5E1E' },
+            ivory:    '#F5F0E8',
+            pearl:    '#EAE4D8',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body:    ['Urbanist', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --gold:    #D4AF37;
+      --copper:  #B87333;
+      --glass:   rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.09);
+      --glow-gold: 0 0 60px rgba(212,175,55,0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: #080E07; }
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background: #080E07;
+      color: #F5F0E8;
+      overflow-x: hidden;
+    }
+
+    /* ─── Custom Scrollbar ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #080E07; }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 99px; }
+
+    /* ─── Noise Texture Overlay ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: .4;
+    }
+
+    /* ─── Glass Card ─── */
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .glass-dark {
+      background: rgba(6,13,5,0.6);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* ─── Gold Gradient ─── */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #F0D98C 0%, #D4AF37 40%, #B87333 80%, #D4AF37 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .border-gold-gradient {
+      border-image: linear-gradient(135deg, #D4AF37, #B87333, #D4AF37) 1;
+    }
+
+    /* ─── Ambient Glow Orbs ─── */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none; opacity: .18;
+    }
+    .orb-gold  { background: radial-gradient(circle, #D4AF37, transparent 70%); }
+    .orb-green { background: radial-gradient(circle, #2D5A27, transparent 70%); }
+    .orb-copper{ background: radial-gradient(circle, #B87333, transparent 70%); }
+
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(32px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; } to { opacity:1; }
+    }
+    @keyframes shimmer {
+      0%,100% { background-position: -200% center; }
+      50%      { background-position: 200% center; }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes pulseGold {
+      0%,100% { box-shadow: 0 0 0 0 rgba(212,175,55,.4); }
+      50%      { box-shadow: 0 0 0 18px rgba(212,175,55,0); }
+    }
+    @keyframes lineGrow {
+      from { width: 0; } to { width: 60px; }
+    }
+
+    .anim-fade-up  { opacity:0; animation: fadeUp .8s ease forwards; }
+    .anim-fade-in  { opacity:0; animation: fadeIn 1s ease forwards; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+    .delay-4 { animation-delay: .4s; }
+    .delay-5 { animation-delay: .5s; }
+    .delay-6 { animation-delay: .6s; }
+    .delay-7 { animation-delay: .7s; }
+
+    /* ─── Scroll reveal ─── */
+    .sr { opacity:0; transform: translateY(36px); transition: opacity .8s ease, transform .8s ease; }
+    .sr-l { opacity:0; transform: translateX(-40px); transition: opacity .8s ease, transform .8s ease; }
+    .sr-r { opacity:0; transform: translateX(40px); transition: opacity .8s ease, transform .8s ease; }
+    .sr.in, .sr-l.in, .sr-r.in { opacity:1; transform: translate(0); }
+
+    /* ─── Hero ─── */
+    #hero { min-height: 100svh; }
+    .hero-bg { position:absolute; inset:0; }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position: center; }
+    .hero-gradient {
+      position:absolute; inset:0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,14,7,0.3) 0%,
+        rgba(8,14,7,0.5) 40%,
+        rgba(8,14,7,0.92) 85%,
+        #080E07 100%
+      );
+    }
+    .hero-vignette {
+      position:absolute; inset:0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(8,14,7,0.7) 100%);
+    }
+
+    /* ─── Marquee ─── */
+    .marquee-track { animation: marquee 22s linear infinite; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── Bento Grid ─── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 12px;
+    }
+    .bento-a { grid-column: span 2; grid-row: span 2; }
+    .bento-b { grid-column: span 2; }
+    .bento-c { grid-column: span 1; }
+    .bento-d { grid-column: span 1; }
+    .bento-e { grid-column: span 2; }
+    .bento-f { grid-column: span 4; }
+    @media (max-width: 768px) {
+      .bento-grid { grid-template-columns: 1fr 1fr; }
+      .bento-a { grid-column: span 2; grid-row: span 1; }
+      .bento-b, .bento-e, .bento-f { grid-column: span 2; }
+      .bento-c, .bento-d { grid-column: span 1; }
+    }
+    @media (max-width: 480px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-a,.bento-b,.bento-c,.bento-d,.bento-e,.bento-f { grid-column: span 1; }
+    }
+
+    /* ─── Bento Card ─── */
+    .bento-card {
+      position: relative; overflow: hidden; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
+    }
+    .bento-card:hover {
+      border-color: rgba(212,175,55,0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.08);
+    }
+    .bento-card-img { width:100%; height:100%; object-fit:cover; transition: transform .6s ease; }
+    .bento-card:hover .bento-card-img { transform: scale(1.06); }
+    .bento-label {
+      position: absolute; bottom:0; left:0; right:0;
+      background: linear-gradient(to top, rgba(8,14,7,0.95) 0%, transparent 100%);
+      padding: 2.5rem 1.5rem 1.25rem;
+    }
+
+    /* ─── Gallery bento ─── */
+    .gal-grid {
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 200px;
+      gap: 10px;
+    }
+    .g1  { grid-column: span 7; grid-row: span 2; }
+    .g2  { grid-column: span 5; grid-row: span 1; }
+    .g3  { grid-column: span 5; grid-row: span 1; }
+    .g4  { grid-column: span 4; grid-row: span 2; }
+    .g5  { grid-column: span 4; grid-row: span 2; }
+    .g6  { grid-column: span 4; grid-row: span 2; }
+    @media(max-width:1024px) {
+      .gal-grid { grid-template-columns: repeat(6,1fr); grid-auto-rows: 160px; }
+      .g1 { grid-column: span 6; grid-row: span 2; }
+      .g2,.g3 { grid-column: span 3; }
+      .g4,.g5,.g6 { grid-column: span 2; }
+    }
+    @media(max-width:640px) {
+      .gal-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+      .g1 { grid-column: span 2; }
+      .g2,.g3,.g4,.g5,.g6 { grid-column: span 1; }
+    }
+    .gal-item { position:relative; overflow:hidden; border-radius:12px; border: 1px solid rgba(255,255,255,0.06); cursor:pointer; }
+    .gal-item img { width:100%; height:100%; object-fit:cover; transition: transform .6s ease; }
+    .gal-item:hover img { transform: scale(1.08); }
+    .gal-item::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(8,14,7,0.7) 0%, transparent 60%);
+      opacity:0; transition: opacity .4s;
+    }
+    .gal-item:hover::after { opacity:1; }
+
+    /* ─── Stats ─── */
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #F0D98C, #D4AF37);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    /* ─── CTA Button ─── */
+    .btn-gold {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #D4AF37 0%, #B87333 50%, #D4AF37 100%);
+      background-size: 200% auto;
+      color: #080E07; font-weight: 700;
+      border-radius: 99px; transition: background-position .5s ease, transform .3s, box-shadow .3s;
+    }
+    .btn-gold:hover {
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(212,175,55,0.4);
+    }
+    .btn-outline {
+      border: 1px solid rgba(212,175,55,0.5);
+      color: #D4AF37; border-radius: 99px;
+      transition: background .3s, color .3s, transform .3s;
+    }
+    .btn-outline:hover {
+      background: rgba(212,175,55,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Testimonial ─── */
+    .testi-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; transition: border-color .4s, transform .4s;
+    }
+    .testi-card:hover { border-color: rgba(212,175,55,.3); transform: translateY(-4px); }
+
+    /* ─── Nav ─── */
+    #nav { transition: background .4s, backdrop-filter .4s, border-color .4s; }
+    #nav.solid {
+      background: rgba(8,14,7,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+    }
+
+    /* ─── Divider ─── */
+    .divider-line {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .divider-line::before, .divider-line::after {
+      content:''; flex:1; height:1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    }
+
+    /* ─── FAQ ─── */
+    .faq-body { max-height:0; overflow:hidden; transition: max-height .45s ease, padding .3s; }
+    .faq-body.open { max-height: 240px; }
+    .faq-row { border-bottom: 1px solid rgba(255,255,255,0.07); transition: border-color .3s; }
+    .faq-row:hover { border-color: rgba(212,175,55,0.25); }
+
+    /* ─── WhatsApp ─── */
+    .wpp-float { animation: pulseGold 2.2s infinite; }
+
+    /* ─── Pill tag ─── */
+    .pill {
+      font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      padding:.3rem .9rem; border-radius:99px;
+      background: rgba(212,175,55,.12); border: 1px solid rgba(212,175,55,.25); color: #D4AF37;
+      display:inline-block;
+    }
+
+    /* ─── Section spacing ─── */
+    .section { padding: 7rem 0; }
+    @media(max-width:768px){ .section { padding: 5rem 0; } }
+
+    /* ─── Horizontal rule with diamond ─── */
+    .hr-diamond { position:relative; text-align:center; margin:2.5rem 0; }
+    .hr-diamond::before {
+      content:''; position:absolute; top:50%; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,.3), transparent);
+    }
+    .hr-diamond span {
+      position:relative; z-index:1;
+      background:#080E07; padding:0 1rem; color:rgba(212,175,55,.6); font-size:1rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════ -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+
+    <a href="#hero" class="font-display font-bold text-xl tracking-wide">
+      <span class="text-gold-gradient">Chalés</span><span class="text-ivory/60 font-light"> Verde Encanto</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm font-body font-medium text-ivory/60">
+      <a href="#sobre"      class="hover:text-gold-400 transition-colors">O Espaço</a>
+      <a href="#diferenciais" class="hover:text-gold-400 transition-colors">Experiências</a>
+      <a href="#galeria"    class="hover:text-gold-400 transition-colors">Galeria</a>
+      <a href="#depoimentos" class="hover:text-gold-400 transition-colors">Histórias</a>
+      <a href="#faq"        class="hover:text-gold-400 transition-colors">FAQ</a>
+    </div>
+
+    <a href="https://wa.me/5531990732424?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20meu%20evento."
+       target="_blank"
+       class="btn-gold text-sm px-6 py-2.5 font-body flex items-center gap-2">
+      <i class="fab fa-whatsapp"></i>
+      <span class="hidden sm:inline">Consultar Disponibilidade</span>
+      <span class="sm:hidden">Consultar</span>
+    </a>
+
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section id="hero" class="relative flex items-end pb-20 md:pb-28 overflow-hidden">
+
+  <!-- Orbs ambientes -->
+  <div class="orb orb-gold  w-[500px] h-[500px] top-[-100px] left-[-100px]"></div>
+  <div class="orb orb-green w-[600px] h-[600px] bottom-0 right-[-200px]"></div>
+
+  <!-- Foto de fundo: Vista aérea -->
+  <div class="hero-bg">
+    <!-- imagem_8.jpg → Vista aérea da propriedade com piscina, chalés e mata densa -->
+    <img src="assets/imagem 8.jpg"
+         alt="Vista aérea do Cháles Verde Encanto: propriedade de 5 hectares cercada por mata nativa, piscina e chalés com telhado cerâmico"
+         onerror="this.parentElement.style.background='linear-gradient(135deg,#0A1409,#162B13)'"/>
+    <div class="hero-gradient"></div>
+    <div class="hero-vignette"></div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+    <div class="max-w-3xl">
+
+      <div class="pill anim-fade-up delay-1">✦ Espaço Exclusivo para Eventos</div>
+
+      <h1 class="font-display text-ivory mt-5 mb-6 leading-[1.08]
+                 text-[clamp(2.6rem,6vw,5.2rem)] font-bold anim-fade-up delay-2">
+        Onde memórias<br/>
+        <em class="text-gold-gradient not-italic">inesquecíveis</em><br/>
+        encontram a natureza
+      </h1>
+
+      <p class="font-body text-ivory/60 text-lg leading-relaxed max-w-xl mb-10 anim-fade-up delay-3">
+        Um refúgio entre árvores centenárias, pensado para quem deseja mais do que um evento —
+        deseja uma experiência que o tempo não apaga.
+      </p>
+
+      <div class="flex flex-wrap gap-4 anim-fade-up delay-4">
+        <a href="https://wa.me/5531990732424?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20meu%20evento."
+           target="_blank"
+           class="btn-gold font-body text-base px-9 py-4 flex items-center gap-2.5">
+          <i class="fab fa-whatsapp text-xl"></i>
+          Agendar Visita Exclusiva
+        </a>
+        <a href="#galeria" class="btn-outline font-body text-base px-9 py-4 flex items-center gap-2">
+          <i class="fas fa-images text-sm"></i>
+          Explorar o Espaço
+        </a>
+      </div>
+
+      <!-- Micro stats -->
+      <div class="mt-14 flex flex-wrap gap-8 anim-fade-up delay-5">
+        <div>
+          <p class="stat-num leading-none">+500</p>
+          <p class="text-ivory/40 text-sm font-body mt-1">eventos realizados</p>
+        </div>
+        <div class="w-px h-12 bg-white/10 self-center"></div>
+        <div class="w-px h-12 bg-white/10 self-center"></div>
+        <div>
+          <p class="stat-num leading-none">+10</p>
+          <p class="text-ivory/40 text-sm font-body mt-1">anos de história</p>
+        </div>
+        <div class="w-px h-12 bg-white/10 self-center"></div>
+        <div>
+          <p class="stat-num leading-none">⭐4.9</p>
+          <p class="text-ivory/40 text-sm font-body mt-1">avaliação dos casais</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-6 right-8 z-10 flex flex-col items-center gap-2 anim-fade-in delay-7">
+    <span class="text-ivory/30 text-xs font-body tracking-widest" style="writing-mode:vertical-rl">EXPLORAR</span>
+    <div class="w-px h-12 bg-gradient-to-b from-gold-500/50 to-transparent"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     MARQUEE
+═══════════════════════════════════════════════ -->
+<div class="border-y border-white/5 py-4 overflow-hidden bg-forest-900/40">
+  <div class="marquee-track flex items-center gap-0 whitespace-nowrap" style="width:max-content">
+    <template id="marquee-item">
+      <span class="font-display italic text-ivory/20 text-lg px-10">Casamentos</span>
+      <span class="text-gold-500 text-xs px-2">◆</span>
+      <span class="font-display italic text-ivory/20 text-lg px-10">Aniversários</span>
+      <span class="text-gold-500 text-xs px-2">◆</span>
+      <span class="font-display italic text-ivory/20 text-lg px-10">Corporativos</span>
+      <span class="text-gold-500 text-xs px-2">◆</span>
+      <span class="font-display italic text-ivory/20 text-lg px-10">Cerimônias ao Ar Livre</span>
+      <span class="text-gold-500 text-xs px-2">◆</span>
+      <span class="font-display italic text-ivory/20 text-lg px-10">Debutantes</span>
+      <span class="text-gold-500 text-xs px-2">◆</span>
+      <span class="font-display italic text-ivory/20 text-lg px-10">Confraternizações</span>
+      <span class="text-gold-500 text-xs px-2">◆</span>
+    </template>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     SOBRE
+═══════════════════════════════════════════════ -->
+<section id="sobre" class="section relative overflow-hidden">
+  <div class="orb orb-gold w-[400px] h-[400px] top-0 right-[-80px] opacity-10"></div>
+
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Imagem stack -->
+      <div class="relative sr-l">
+        <div class="aspect-[3/4] rounded-2xl overflow-hidden">
+          <!-- imagem_4.jpg → Cerimônia de casamento ao ar livre: altar branco com drapeado, flores vermelhas exuberantes e tapete verde -->
+          <img src="assets/imagem 4.jpg"
+               alt="Cerimônia de casamento ao ar livre no Cháles Verde Encanto: passarela verde com flores vermelhas, altar branco com drapeado e vegetação exuberante ao fundo"
+               class="w-full h-full object-cover"
+               onerror="this.parentElement.style.background='#0F1E0D'"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-transparent to-transparent"></div>
+        </div>
+        <!-- Floating card -->
+        <div class="glass absolute -bottom-6 -right-5 md:right-[-3rem] p-5 rounded-2xl max-w-[220px]">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center">
+              <i class="fas fa-star text-gold-400 text-xs"></i>
+            </div>
+            <span class="text-ivory/80 text-sm font-body font-semibold">Avaliação</span>
+          </div>
+          <p class="stat-num text-3xl">4.9/5</p>
+          <p class="text-ivory/40 text-xs font-body mt-1">+500 eventos realizados</p>
+        </div>
+        <!-- Linha decorativa -->
+        <div class="absolute -top-4 -left-4 w-24 h-24 border border-gold-500/20 rounded-2xl"></div>
+      </div>
+
+      <!-- Texto -->
+      <div class="sr-r">
+        <div class="pill mb-5">Nossa Essência</div>
+        <h2 class="font-display text-ivory text-4xl md:text-5xl font-bold leading-tight mb-6">
+          Não apenas um espaço.<br/>
+          <em class="text-gold-gradient not-italic">Um estado de presença.</em>
+        </h2>
+        <div class="w-14 h-0.5 bg-gradient-to-r from-gold-500 to-copper-500 mb-6" style="animation: lineGrow .8s ease forwards;"></div>
+        <p class="font-body text-ivory/55 text-base leading-relaxed mb-5">
+          O Cháles Verde Encanto nasceu de uma crença simples: que celebrações verdadeiras pedem silêncio
+          de cidade, cheiro de terra e o sussurro das copas. Aqui, a natureza não é decoração —
+          ela é protagonista.
+        </p>
+        <p class="font-body text-ivory/55 text-base leading-relaxed mb-10">
+          Em mais de 5 hectares de mata preservada, cada canto foi pensado para que seus convidados
+          vivam algo raro: a sensação de estar completamente fora do mundo — e, ao mesmo tempo,
+          exatamente onde deveriam estar.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass rounded-xl p-4">
+            <i class="fas fa-map-marker-alt text-gold-400 mb-2"></i>
+            <p class="text-ivory/80 text-sm font-body font-semibold">Localização</p>
+            <p class="text-ivory/40 text-xs font-body">Grande BH, Minas Gerais</p>
+          </div>
+          <div class="glass rounded-xl p-4">
+            <i class="fas fa-users text-gold-400 mb-2"></i>
+            <p class="text-ivory/80 text-sm font-body font-semibold">Capacidade</p>
+            <p class="text-ivory/40 text-xs font-body">Até 300 convidados</p>
+          </div>
+          <div class="glass rounded-xl p-4">
+            <i class="fas fa-moon text-gold-400 mb-2"></i>
+            <p class="text-ivory/80 text-sm font-body font-semibold">Horário</p>
+            <p class="text-ivory/40 text-xs font-body">Diurno e Noturno</p>
+          </div>
+          <div class="glass rounded-xl p-4">
+            <i class="fas fa-parking text-gold-400 mb-2"></i>
+            <p class="text-ivory/80 text-sm font-body font-semibold">Estacionamento</p>
+            <p class="text-ivory/40 text-xs font-body">Amplo e gratuito</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     DIFERENCIAIS — BENTO GRID
+═══════════════════════════════════════════════ -->
+<section id="diferenciais" class="section relative">
+  <div class="orb orb-copper w-[350px] h-[350px] bottom-0 left-0 opacity-10"></div>
+
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16 sr">
+      <div class="pill mb-5">Experiências Únicas</div>
+      <h2 class="font-display text-ivory text-4xl md:text-5xl font-bold leading-tight">
+        Cada canto conta<br/>
+        <em class="text-gold-gradient not-italic">uma história diferente</em>
+      </h2>
+    </div>
+
+    <!-- BENTO GRID -->
+    <div class="bento-grid sr">
+
+      <!-- A: GRANDE — Cerimônia casamento -->
+      <div class="bento-card bento-a" style="min-height: 480px;">
+        <!-- imagem_4.jpg → Cerimônia de casamento ao ar livre: passarela verde, flores vermelhas e altar branco -->
+        <img src="assets/imagem 4.jpg"
+             alt="Cerimônia de casamento ao ar livre: passarela de grama, flores vermelhas exuberantes, altar branco com drapeado e natureza ao fundo"
+             class="bento-card-img absolute inset-0"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/30 to-transparent"></div>
+        <div class="bento-label">
+          <div class="pill mb-2">Cerimônia</div>
+          <h3 class="font-display text-ivory text-2xl font-bold leading-tight">
+            O altar mais bonito<br/>já é a própria natureza
+          </h3>
+          <p class="font-body text-ivory/55 text-sm mt-2">
+            Cerimônias ao ar livre em cenário preservado, com passarela, altar personalizado e jardins naturais.
+          </p>
+        </div>
+      </div>
+
+      <!-- B: LARGA — Quiosque -->
+      <div class="bento-card bento-b" style="min-height: 220px;">
+        <!-- imagem_3.jpg → Quiosque aberto com telhado de telha colonial radial, piso de tijolo e churrasqueira -->
+        <img src="assets/imagem 3.jpg"
+             alt="Quiosque amplo com telhado colonial em leque, piso de tijolinho rústico, churrasqueira e vista para a mata nativa"
+             class="bento-card-img absolute inset-0"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-transparent to-transparent"></div>
+        <div class="bento-label">
+          <div class="pill mb-1.5 text-xs">Gastronomia</div>
+          <h3 class="font-display text-ivory text-xl font-bold">Quiosque & Churrasqueira</h3>
+        </div>
+      </div>
+
+      <!-- B continuação: Chalé -->
+      <div class="bento-card bento-b" style="min-height: 220px;">
+        <!-- imagem_1.jpg → Chalé com paredes rosas, telhado cerâmico em pico e jardim na entrada -->
+        <img src="assets/imagem 1.jpg"
+             alt="Chalé charmoso com paredes em tons rosados, telhado cerâmico em formato de pico e jardim florido na entrada"
+             class="bento-card-img absolute inset-0"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/85 via-transparent to-transparent"></div>
+        <div class="bento-label">
+          <div class="pill mb-1.5 text-xs">Hospedagem</div>
+          <h3 class="font-display text-ivory text-xl font-bold">Chalé dos Noivos</h3>
+        </div>
+      </div>
+
+      <!-- C: Piscina -->
+      <div class="bento-card bento-c" style="min-height: 240px;">
+        <!-- imagem_5.jpg → Piscina retangular com muro de tijolos, cercada por palmeiras e mata -->
+        <img src="assets/imagem 5.jpg"
+             alt="Piscina retangular de grande porte com água cristalina, muro de tijolos aparentes e moldura de palmeiras e mata nativa"
+             class="bento-card-img absolute inset-0"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-transparent to-transparent"></div>
+        <div class="bento-label">
+          <div class="pill mb-1 text-xs">Lazer</div>
+          <h3 class="font-display text-ivory text-lg font-bold">Piscina Privativa</h3>
+        </div>
+      </div>
+
+      <!-- D: Jardim / Trilha -->
+      <div class="bento-card bento-d" style="min-height: 240px;">
+        <!-- imagem_6.jpg → Trilha com bambus, palmeiras e lanterna de jardim entre vegetação nativa -->
+        <img src="assets/imagem 6.jpg"
+             alt="Trilha iluminada por lanterna de jardim entre maciços de bambu, palmeiras e árvores nativas em ambiente sereno"
+             class="bento-card-img absolute inset-0"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-transparent to-transparent"></div>
+        <div class="bento-label">
+          <div class="pill mb-1 text-xs">Natureza</div>
+          <h3 class="font-display text-ivory text-lg font-bold">Trilhas & Jardins</h3>
+        </div>
+      </div>
+
+      <!-- E: Área cerimônia -->
+      <div class="bento-card bento-e" style="min-height: 240px;">
+        <!-- imagem_7.jpg → Área de cerimônia ao ar livre com cadeiras pretas tipo cruzeta, passarela de grama e vasos de flores -->
+        <img src="assets/imagem 7.jpg"
+             alt="Área de cerimônia ao ar livre: passarela de grama flanqueada por cadeiras pretas, vasos de flores amarelas e brancas e árvores nativas ao fundo"
+             class="bento-card-img absolute inset-0"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-transparent to-transparent"></div>
+        <div class="bento-label">
+          <div class="pill mb-1.5 text-xs">Celebração</div>
+          <h3 class="font-display text-ivory text-xl font-bold">Espaço para Cerimônias — Configuração Flexível</h3>
+        </div>
+      </div>
+
+      <!-- F: Vista aérea full -->
+      <div class="bento-card bento-f" style="min-height: 260px;">
+        <!-- imagem_8.jpg → Vista aérea da propriedade: piscina, chalés, caminhos e mata densa cobrindo tudo -->
+        <img src="assets/imagem 8.jpg"
+             alt="Vista aérea da propriedade Cháles Verde Encanto: 5 hectares de mata nativa com piscina, chalés de telhado cerâmico, caminhos paisagísticos e vegetação exuberante"
+             class="bento-card-img absolute inset-0 object-center"
+             onerror="this.parentElement.style.background='#0F1E0D'"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-forest-950/80 via-forest-950/30 to-transparent"></div>
+        <div class="absolute left-0 bottom-0 p-8 max-w-lg">
+          <div class="pill mb-3">Visão Geral</div>
+          <h3 class="font-display text-ivory text-2xl md:text-3xl font-bold leading-tight">
+            5 hectares onde cada passo<br/>é uma descoberta
+          </h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     BREAK — CTA STRIP
+═══════════════════════════════════════════════ -->
+<div class="py-12 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-forest-800 via-forest-700 to-forest-800 opacity-60"></div>
+  <div class="absolute inset-0" style="background: repeating-linear-gradient(90deg, transparent, transparent 98px, rgba(212,175,55,0.05) 98px, rgba(212,175,55,0.05) 100px);"></div>
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 sr">
+    <div>
+      <p class="font-display text-ivory text-2xl md:text-3xl font-bold">
+        Sua data pode ainda estar <span class="text-gold-gradient">disponível.</span>
+      </p>
+      <p class="font-body text-ivory/50 text-sm mt-1">Consulte agora. Nossa equipe responde em minutos.</p>
+    </div>
+    <a href="https://wa.me/5531990732424?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20meu%20evento."
+       target="_blank"
+       class="btn-gold font-body text-base px-10 py-4 flex items-center gap-3 shrink-0">
+      <i class="fab fa-whatsapp text-xl"></i>
+      Verificar Disponibilidade
+    </a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     GALERIA
+═══════════════════════════════════════════════ -->
+<section id="galeria" class="section relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12 sr">
+      <div>
+        <div class="pill mb-4">Galeria Imersiva</div>
+        <h2 class="font-display text-ivory text-4xl md:text-5xl font-bold leading-tight">
+          Cada ângulo esconde<br/>
+          <em class="text-gold-gradient not-italic">uma nova beleza</em>
+        </h2>
+      </div>
+      <p class="font-body text-ivory/40 text-sm max-w-xs mt-4 md:mt-0 text-right leading-relaxed">
+        Fotografias reais do espaço.<br/>
+        Sem filtros — a natureza já é extraordinária.
+      </p>
+    </div>
+
+    <!-- GALLERY BENTO -->
+    <div class="gal-grid sr">
+
+      <!-- g1 — GRANDE: casamento flores vermelhas -->
+      <div class="gal-item g1">
+        <!-- imagem_4.jpg → Cerimônia de casamento ao ar livre com flores vermelhas, altar com drapeado branco -->
+        <img src="assets/imagem 4.jpg"
+             alt="Cerimônia de casamento ao ar livre com passarela verde, flores vermelhas exuberantes e altar branco sob céu aberto"/>
+      </div>
+
+      <!-- g2: vista aérea -->
+      <div class="gal-item g2">
+        <!-- imagem_8.jpg → Vista aérea: piscina + chalés + mata -->
+        <img src="assets/imagem 8.jpg"
+             alt="Vista aérea da propriedade mostrando piscina, chalés de telhado cerâmico e mata nativa exuberante"/>
+      </div>
+
+      <!-- g3: piscina -->
+      <div class="gal-item g3">
+        <!-- imagem_5.jpg → Piscina com palmeiras e céu azul -->
+        <img src="assets/imagem 5.jpg"
+             alt="Piscina retangular com água cristalina cercada por palmeiras e mata nativa sob céu azul intenso"/>
+      </div>
+
+      <!-- g4: quiosque -->
+      <div class="gal-item g4">
+        <!-- imagem_3.jpg → Quiosque com telhado colonial e churrasqueira -->
+        <img src="assets/imagem 3.jpg"
+             alt="Quiosque amplo com telhado colonial em leque, piso de tijolinho e churrasqueira rústica"/>
+      </div>
+
+      <!-- g5: jardim/trilha -->
+      <div class="gal-item g5">
+        <!-- imagem_6.jpg → Trilha entre bambus com lanterna -->
+        <img src="assets/imagem 6.jpg"
+             alt="Trilha serena entre maciços de bambu com lanterna de jardim e luz filtrada pelas árvores"/>
+      </div>
+
+      <!-- g6: chalé rosa -->
+      <div class="gal-item g6">
+        <!-- imagem_1.jpg → Chalé com paredes rosas e jardim -->
+        <img src="assets/imagem 1.jpg"
+             alt="Chalé encantado com paredes rosas, telhado cerâmico e jardim florido na entrada"/>
+      </div>
+
+      <!-- Adicional: cerimônia 2 -->
+      <div class="gal-item" style="grid-column: span 12;">
+        <!-- imagem_7.jpg → Área cerimônia com cadeiras pretas e vasos -->
+        <img src="assets/imagem 7.jpg"
+             alt="Área de cerimônia ao ar livre com fileiras de cadeiras pretas, passarela de grama e flores em vasos nos corredores"/>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     TIPOS DE EVENTOS
+═══════════════════════════════════════════════ -->
+<section class="section">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-12 sr">
+      <div class="pill mb-4">Para Toda Ocasião</div>
+      <h2 class="font-display text-ivory text-4xl font-bold">
+        O palco certo para cada<br/>
+        <em class="text-gold-gradient not-italic">capítulo da sua vida</em>
+      </h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sr">
+      <div class="glass rounded-2xl p-8 text-center hover:border-gold-500/30 transition-all group cursor-default">
+        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">💍</div>
+        <h3 class="font-display text-ivory text-lg font-semibold mb-1">Casamentos</h3>
+        <p class="font-body text-ivory/40 text-xs">Cerimônia & Recepção</p>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center hover:border-gold-500/30 transition-all group cursor-default">
+        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">🎂</div>
+        <h3 class="font-display text-ivory text-lg font-semibold mb-1">Aniversários</h3>
+        <p class="font-body text-ivory/40 text-xs">Todas as Idades</p>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center hover:border-gold-500/30 transition-all group cursor-default">
+        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">🏢</div>
+        <h3 class="font-display text-ivory text-lg font-semibold mb-1">Corporativos</h3>
+        <p class="font-body text-ivory/40 text-xs">Reuniões & Retiros</p>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center hover:border-gold-500/30 transition-all group cursor-default">
+        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">🌿</div>
+        <h3 class="font-display text-ivory text-lg font-semibold mb-1">Confraternizações</h3>
+        <p class="font-body text-ivory/40 text-xs">Família & Amigos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     DEPOIMENTOS
+═══════════════════════════════════════════════ -->
+<section id="depoimentos" class="section relative overflow-hidden">
+  <div class="orb orb-gold w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-8"></div>
+
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-14 sr">
+      <div class="pill mb-4">Histórias Reais</div>
+      <h2 class="font-display text-ivory text-4xl md:text-5xl font-bold leading-tight">
+        Quem viveu aqui<br/>
+        <em class="text-gold-gradient not-italic">não sabe mais descrever</em>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="testi-card p-8 sr" style="transition-delay:.05s">
+        <div class="flex gap-1 mb-5">
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+        </div>
+        <p class="font-display text-ivory/80 text-lg italic leading-relaxed mb-6">
+          "Nosso casamento foi a coisa mais bonita que já vivi. Não existe decoração que substitua
+          aquela natureza. Nossos convidados ainda comentam — dois anos depois."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-copper-500 flex items-center justify-center font-display font-bold text-forest-950 text-sm">A</div>
+          <div>
+            <p class="font-body text-ivory/80 text-sm font-semibold">Ana & Pedro</p>
+            <p class="font-body text-ivory/30 text-xs">Casamento — Março 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card p-8 sr" style="transition-delay:.12s">
+        <div class="flex gap-1 mb-5">
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+        </div>
+        <p class="font-display text-ivory/80 text-lg italic leading-relaxed mb-6">
+          "A festa dos meus 50 anos virou o padrão de comparação pra qualquer coisa depois. O quiosque,
+          a piscina, o chalé — tudo tão bem cuidado. Uma experiência completa e inesquecível."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-copper-500 flex items-center justify-center font-display font-bold text-forest-950 text-sm">M</div>
+          <div>
+            <p class="font-body text-ivory/80 text-sm font-semibold">Marcia Oliveira</p>
+            <p class="font-body text-ivory/30 text-xs">Aniversário — Julho 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card p-8 sr" style="transition-delay:.2s">
+        <div class="flex gap-1 mb-5">
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+          <i class="fas fa-star text-gold-400 text-xs"></i>
+        </div>
+        <p class="font-display text-ivory/80 text-lg italic leading-relaxed mb-6">
+          "Usamos para confraternização da empresa. Todo mundo queria saber onde era. A equipe foi
+          impecável, o espaço é único. Viramos clientes fiéis desde então."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-copper-500 flex items-center justify-center font-display font-bold text-forest-950 text-sm">R</div>
+          <div>
+            <p class="font-body text-ivory/80 text-sm font-semibold">Rafael Mendes</p>
+            <p class="font-body text-ivory/30 text-xs">Corporativo — Dez 2023</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════ -->
+<section id="faq" class="section">
+  <div class="max-w-3xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-14 sr">
+      <div class="pill mb-4">Dúvidas Frequentes</div>
+      <h2 class="font-display text-ivory text-4xl font-bold">
+        Tudo o que você<br/>
+        <em class="text-gold-gradient not-italic">precisa saber</em>
+      </h2>
+    </div>
+
+    <div class="space-y-0 sr">
+
+      <div class="faq-row py-6">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left group gap-4">
+          <span class="font-display text-ivory/90 text-lg font-semibold group-hover:text-gold-400 transition-colors">
+            Qual a capacidade máxima do espaço?
+          </span>
+          <div class="w-8 h-8 glass rounded-full flex items-center justify-center shrink-0 text-gold-400 transition-transform" data-icon>
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="faq-body">
+          <p class="font-body text-ivory/50 text-sm leading-relaxed pt-4 pb-2">
+            O espaço acomoda confortavelmente até 300 convidados, com diferentes configurações para cerimônias
+            e recepções. Consulte-nos para adaptar o layout ao número exato de convidados do seu evento.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-row py-6">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left group gap-4">
+          <span class="font-display text-ivory/90 text-lg font-semibold group-hover:text-gold-400 transition-colors">
+            Vocês trabalham com fornecedores exclusivos?
+          </span>
+          <div class="w-8 h-8 glass rounded-full flex items-center justify-center shrink-0 text-gold-400 transition-transform" data-icon>
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="faq-body">
+          <p class="font-body text-ivory/50 text-sm leading-relaxed pt-4 pb-2">
+            Temos parceiros recomendados de buffet, decoração, fotografia e sonorização — todos já familiarizados
+            com o espaço. Mas você tem total liberdade para trazer seus próprios fornecedores.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-row py-6">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left group gap-4">
+          <span class="font-display text-ivory/90 text-lg font-semibold group-hover:text-gold-400 transition-colors">
+            Como faço para reservar minha data?
+          </span>
+          <div class="w-8 h-8 glass rounded-full flex items-center justify-center shrink-0 text-gold-400 transition-transform" data-icon>
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="faq-body">
+          <p class="font-body text-ivory/50 text-sm leading-relaxed pt-4 pb-2">
+            Após a visita presencial e confirmação de disponibilidade, a data é garantida com uma entrada.
+            O restante do valor pode ser parcelado conforme negociação. Entre em contato para mais detalhes.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-row py-6">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left group gap-4">
+          <span class="font-display text-ivory/90 text-lg font-semibold group-hover:text-gold-400 transition-colors">
+            Posso visitar antes de fechar contrato?
+          </span>
+          <div class="w-8 h-8 glass rounded-full flex items-center justify-center shrink-0 text-gold-400 transition-transform" data-icon>
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="faq-body">
+          <p class="font-body text-ivory/50 text-sm leading-relaxed pt-4 pb-2">
+            Sempre incentivamos a visita presencial — quem vê o espaço pessoalmente nunca mais pensa em
+            outro lugar. Agende pelo WhatsApp e venha sentir a energia do espaço sem compromisso.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-row py-6 border-b-0">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left group gap-4">
+          <span class="font-display text-ivory/90 text-lg font-semibold group-hover:text-gold-400 transition-colors">
+            O espaço possui gerador e sonorização própria?
+          </span>
+          <div class="w-8 h-8 glass rounded-full flex items-center justify-center shrink-0 text-gold-400 transition-transform" data-icon>
+            <i class="fas fa-plus text-xs"></i>
+          </div>
+        </button>
+        <div class="faq-body">
+          <p class="font-body text-ivory/50 text-sm leading-relaxed pt-4 pb-2">
+            O espaço conta com infraestrutura elétrica completa para suportar grandes eventos. Gerador e
+            sonorização podem ser providenciados pelos nossos parceiros conforme o pacote escolhido.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CTA FINAL
+═══════════════════════════════════════════════ -->
+<section class="section relative overflow-hidden">
+  <!-- BG: foto cerimônia -->
+  <div class="absolute inset-0">
+    <!-- imagem_4.jpg → Cerimônia de casamento com altar e flores vermelhas -->
+    <img src="assets/imagem 4.jpg"
+         alt="Cerimônia de casamento ao ar livre, passarela verde e flores vermelhas, altar branco"
+         class="w-full h-full object-cover"
+         onerror="this.parentElement.style.background='#0A1409'"/>
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(8,14,7,0.97) 0%, rgba(8,14,7,0.88) 50%, rgba(8,14,7,0.97) 100%);"></div>
+  </div>
+
+  <!-- Animated border frame -->
+  <div class="absolute inset-8 border border-gold-500/10 rounded-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center sr">
+    <div class="orb orb-gold w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15"></div>
+
+    <div class="pill mb-6">Comece Agora</div>
+
+    <h2 class="font-display text-ivory text-4xl md:text-6xl font-bold leading-tight mb-6">
+      O evento que você sonhou<br/>
+      começa com <em class="text-gold-gradient not-italic">uma mensagem.</em>
+    </h2>
+
+    <p class="font-body text-ivory/50 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+      Consulte disponibilidade, agende sua visita e descubra por que dezenas de famílias
+      escolhem o Cháles Verde Encanto ano após ano.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+      <a href="https://wa.me/5531990732424?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20meu%20evento."
+         target="_blank"
+         class="btn-gold font-body text-lg px-12 py-5 flex items-center gap-3">
+        <i class="fab fa-whatsapp text-2xl"></i>
+        Falar com a Equipe Agora
+      </a>
+      <a href="#galeria" class="btn-outline font-body text-base px-10 py-5">
+        Ver mais fotos
+      </a>
+    </div>
+
+    <p class="font-body text-ivory/25 text-sm">
+      <i class="fas fa-lock text-gold-500/50 mr-1.5"></i>
+      Respondemos em até 5 minutos durante o horário comercial
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="border-t border-white/5 pt-16 pb-10">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid md:grid-cols-4 gap-10 mb-12">
+
+      <div class="md:col-span-2">
+        <a href="#hero" class="font-display text-3xl font-bold block mb-4">
+          <span class="text-gold-gradient">Cháles</span><span class="text-ivory/40 font-light"> Verde Encanto</span>
+        </a>
+        <p class="font-body text-ivory/40 text-sm leading-relaxed max-w-xs">
+          Um espaço onde a natureza é a cenografia, o silêncio é o luxo e cada momento vira memória permanente.
+        </p>
+        <div class="flex gap-3 mt-6">
+          <a href="https://www.instagram.com/robertoerighi/" class="w-9 h-9 glass rounded-full flex items-center justify-center text-ivory/40 hover:text-gold-400 hover:border-gold-500/30 transition-all">
+            <i class="fab fa-instagram text-sm"></i>
+          </a>
+          <a href="#" class="w-9 h-9 glass rounded-full flex items-center justify-center text-ivory/40 hover:text-gold-400 hover:border-gold-500/30 transition-all">
+            <i class="fab fa-facebook text-sm"></i>
+          </a>
+          <a href="https://wa.me/5531990732424" target="_blank" class="w-9 h-9 glass rounded-full flex items-center justify-center text-ivory/40 hover:text-[#25D366] transition-all">
+            <i class="fab fa-whatsapp text-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-body text-ivory/30 text-xs tracking-widest uppercase mb-5">Navegação</h4>
+        <ul class="space-y-3">
+          <li><a href="#sobre"        class="font-body text-ivory/55 text-sm hover:text-gold-400 transition-colors">O Espaço</a></li>
+          <li><a href="#diferenciais" class="font-body text-ivory/55 text-sm hover:text-gold-400 transition-colors">Experiências</a></li>
+          <li><a href="#galeria"      class="font-body text-ivory/55 text-sm hover:text-gold-400 transition-colors">Galeria</a></li>
+          <li><a href="#depoimentos"  class="font-body text-ivory/55 text-sm hover:text-gold-400 transition-colors">Depoimentos</a></li>
+          <li><a href="#faq"          class="font-body text-ivory/55 text-sm hover:text-gold-400 transition-colors">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-body text-ivory/30 text-xs tracking-widest uppercase mb-5">Contato</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <i class="fab fa-whatsapp text-[#25D366] text-sm mt-0.5"></i>
+            <div>
+              <a href="https://wa.me/5531990732424" target="_blank" class="font-body text-ivory/55 text-sm hover:text-white transition-colors block">(31) 9 9073-2424</a>
+              <span class="font-body text-ivory/25 text-xs">WhatsApp preferencial</span>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="fas fa-envelope text-gold-500/60 text-sm mt-0.5"></i>
+            <span class="font-body text-ivory/55 text-sm"></span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="fas fa-map-marker-alt text-copper-400/70 text-sm mt-0.5"></i>
+            <span class="font-body text-ivory/55 text-sm">Grande BH, Minas Gerais</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="divider-line mb-6"><span class="text-gold-500/30 text-xs">◆</span></div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="font-body text-ivory/20 text-xs">© 2026 Cháles Verde Encanto. Todos os direitos reservados.</p>
+      <p class="font-body text-ivory/20 text-xs">
+        Feito com <span class="text-gold-500/50">♦</span> para celebrar o que é único
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     WHATSAPP FLUTUANTE
+═══════════════════════════════════════════════ -->
+<a href="https://wa.me/5531990732424?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20meu%20evento."
+   target="_blank"
+   class="wpp-float fixed bottom-6 right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110"
+   style="background: #25D366;">
+  <i class="fab fa-whatsapp text-white text-2xl"></i>
+</a>
+
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════ -->
+<script>
+  // ── Marquee duplicate ──
+  const tmpl = document.getElementById('marquee-item');
+  const track = document.querySelector('.marquee-track');
+  if (tmpl && track) {
+    const html = tmpl.innerHTML;
+    track.innerHTML = html + html + html + html;
+  }
+
+  // ── Navbar ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 60), { passive: true });
+
+  // ── Scroll reveal ──
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(el => io.observe(el));
+
+  // ── FAQ ──
+  function toggleFaq(btn) {
+    const body = btn.nextElementSibling;
+    const icon = btn.querySelector('[data-icon] i');
+    const open = body.classList.contains('open');
+    document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('[data-icon] i').forEach(i => {
+      i.classList.remove('fa-minus'); i.classList.add('fa-plus');
+      i.parentElement.style.transform = 'rotate(0deg)';
+    });
+    if (!open) {
+      body.classList.add('open');
+      icon.classList.remove('fa-plus'); icon.classList.add('fa-minus');
+      icon.parentElement.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  // ── Animated counters ──
+  function countUp(el) {
+    const text  = el.textContent;
+    const match = text.match(/[\d.]+/);
+    if (!match) return;
+    const target = parseFloat(match[0]);
+    const dur = 1800, start = performance.now();
+    const tick = now => {
+      const t = Math.min((now - start) / dur, 1);
+      const eased = 1 - (1 - t) ** 3;
+      el.textContent = text.replace(/[\d.]+/, Math.floor(eased * target));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  const cio = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); cio.unobserve(e.target); } });
+  }, { threshold: .5 });
+  document.querySelectorAll('.stat-num').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
